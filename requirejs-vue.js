@@ -2,7 +2,6 @@
  * Vue loader for RequireJS
  *
  * module config: {
- *    pug: String           requirejs module id for `pug` template parser (usually 'browser-pug')
  *    css: String|Function  css transformation strategy
  *    templateVar: String   template name for closure
  * }
@@ -96,21 +95,9 @@ define(['module'], function(module){
       if (start < 0)
         return '';
       var content;
-      // `pug` support requires template mark + loader in config
-      // check for `pug` template engine mark
-      if (/^<template\s+lang="(pug|jade)"/.test(text.substring(start))){
-        if (module.config().pug){
-          var pug = require(module.config().pug);
-          content = this._wrapped_content(text, 'template', {lastIndex: true, escape: false, whitespaces: true});
-          content = pug.render(content);
-        } else {
-          console.warn(module.id + ': missing `pug` in module config');
-        }
-      } else {
-        // generic html
-        content = this._wrapped_content(text, 'template', {lastIndex: true, escape: true})
-          .trim();
-      }
+      // generic html
+      content = this._wrapped_content(text, 'template', {lastIndex: true, escape: true})
+        .trim();
 
       return content;
     },

@@ -1,7 +1,7 @@
 {
   "name": "requirejs-vue",
   "version": "1.1.5",
-  "description": "An AMD loader for Vue components 🤘🏽. Pug 🐶 supported.",
+  "description": "An AMD loader for Vue components 🤘🏽.",
   "main": "requirejs-vue.js",
   "keywords": [
     "javascript",
@@ -9,9 +9,7 @@
     "requirejs",
     "loader",
     "single file component",
-    "vue",
-    "pug",
-    "jade"
+    "vue"
   ],
   "files": [],
   "repository": "https://github.com/vikseriq/requirejs-vue",

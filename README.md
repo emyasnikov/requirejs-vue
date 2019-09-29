@@ -15,8 +15,6 @@ XMLHttpRequest from local file URLs, so use a web server to serve your ```.vue``
 
 The server-side building with RequireJS Optimizer [r.js](https://github.com/requirejs/r.js) also available and works well.
 
-Plugin supports `pug` templates. Provide pug parser via module config. Tested with [browser-side pug renderer](https://github.com/vikseriq/browser-pug).
-
 Since another templating engines or css preprocessors (like [less](https://github.com/guybedford/require-less)/sass)
 not available as maintained AMD modules there are no plans to support them. Feel free to write your own 😉
 
@@ -56,7 +54,6 @@ Setup loader in RequireJS path like this:
         },
         config: {
             'vue': {
-                'pug': 'browser-pug',
                 'css': 'inject'
                 'templateVar': 'template'
             }
@@ -93,12 +90,6 @@ Strategy to deal with component stylesheets. Variants:
 		style content, `option.name` hold component file reference
 
 
-#### `pug`
-`String`, default: `<none>`
-
-Module name for Pug template rendering.
-
-
 #### `templateVar`
 `String`, default: `template`
 
@@ -126,57 +117,6 @@ define(['Vue'], function(vue){
 });
 </script>
 ```
-
-### Pug templates
-
-Using [browser-pug](https://github.com/vikseriq/browser-pug) it is possible to transpose
-basic `pug` markup as Vue template. To achieve do next steps:
-
-1. Install ```browser-pug``` plugin
-
-```bash
-yarn add browser-pug
-```
-
-2. Setup module paths and configs in your RequireJS config:
-
-	...
-		paths: {
-		...
-			Vue: 'node_modules/vue/dist/vue.min',
-        	'vue-loader': 'node_modules/requirejs-vue/requirejs-vue',
-			'browser-pug': 'mode_modules/browser-pug/browser-pug'
-		...
-		},
-		config: {
-            'vue-loader': {
-                pug: 'browser-pug'
-            }
-        }
-    ...
-
-
-3. Mark template as pug-able in your Vue component:
-
-```html
-<template lang="pug">
-div
-	p Here comes the magic
-	a(v-bind:href="dummyLink") Follow us
-</template>
-<script>
-  define(['Vue'], function(Vue){
-    new Vue({
-      template: template,
-      data: {
-        dummyLink: 'http://bit.ly/naked_truth_about_javascript'
-      }
-    }).$mount('#app');
-  });
-</script>
-```
-
-***Note: be aware of using this heavily in production may slow down your app initialization due client-side `.pug` rendering***
 
 ### Server-side building with r.js
 
